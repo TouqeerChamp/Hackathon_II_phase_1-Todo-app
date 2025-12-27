@@ -1,111 +1,78 @@
-# CLI Todo App
+# 🚀 Hackathon II - AI-Powered Todo App (Phase I)
 
-A command-line interface (CLI) application for managing to-do tasks. This application allows users to create, view, update, mark complete/incomplete, and delete tasks through a simple text-based menu interface.
+A sophisticated, modular todo application featuring natural language processing capabilities and persistent storage, built with Python and designed for the WSL environment.
 
-## Features
+## 🏗️ Architecture
 
-- Add new tasks with titles and optional descriptions
-- View all tasks with their completion status
-- Update existing task titles and descriptions
-- Mark tasks as complete or incomplete
-- Delete tasks with confirmation
-- Simple, intuitive menu-driven interface
+This application follows a clean, modular architecture with distinct layers:
 
-## Prerequisites
+- **Models** (`src/models/`): Contains the `Task` data model defining the structure of todo items
+- **Services** (`src/services/`): Business logic layer with `TaskManager` for CRUD operations and `StorageManager` for data persistence
+- **UI** (`src/ui/`): User interface layer with `CLIInterface` for user interaction
+- **Agent** (`src/agent/`): Intelligence layer with `TodoAgent` for natural language processing
 
-- Python 3.13 or higher
+## 🧠 The Intelligence Skill
 
-## Installation
+The `TodoAgent` module is the core intelligence of this application, featuring:
 
-1. Clone or download this repository
-2. Navigate to the project root directory
-3. Ensure you have Python 3.13+ installed:
-   ```bash
-   python --version
-   ```
+- **Natural Language Command Parsing**: Understands commands like `add Buy groceries`, `list tasks`, `done 1`, `remove 2`
+- **No External LLM Calls**: All processing happens locally using regex patterns and string matching
+- **Smart Command Recognition**: Supports various command formats and provides helpful feedback
 
-## Usage
+## 💾 Data Persistence
 
-To run the application, execute the following command from the project root directory:
+The `StorageManager` handles data persistence using JSON files:
+
+- **JSON Storage**: Tasks are saved to and loaded from `data/tasks.json`
+- **WSL Environment Optimized**: Designed specifically for WSL2/Linux environments
+- **Automatic Recovery**: Loads existing tasks on application startup
+
+## 🛠️ Tech Stack
+
+- **Language**: Python 3.x
+- **Environment**: WSL2 (Linux)
+- **Development Framework**: Multi-Agent System (Spec-Kit) with specialized agents
+- **Server**: MCP GitHub Server
+
+## ▶️ How to Run
+
+1. Clone the repository
+2. Navigate to the project directory
+3. Run the application:
 
 ```bash
-python src/todo_app.py
+python3 -m src.todo_app
 ```
 
-The application will start with a welcome message and display the main menu with the following options:
+## 🏗️ Development Process
 
-1. **Add Task**: Creates a new task with a title and optional description
-2. **View Tasks**: Displays all tasks with their completion status ([ ] or [✓])
-3. **Update Task**: Modifies the title or description of an existing task
-4. **Mark Complete/Incomplete**: Toggles the completion status of a task
-5. **Delete Task**: Removes a task from the list (with confirmation)
-6. **Exit**: Terminates the application
+This project was built using a **Multi-Agent Development System** powered by Spec-Kit:
 
-## Example Usage
+- **Specialized Agents**: Used dedicated agents for business logic and persistence
+- **Spec-Driven Development**: Followed structured specifications throughout development
+- **Modular Design**: Implemented clean separation of concerns between components
+- **AI-Assisted Development**: Leveraged intelligent agents for code generation and maintenance
 
-```
-Welcome to the Todo App!
-Please select an option:
-1. Add Task
-2. View Tasks
-3. Update Task
-4. Mark Complete/Incomplete
-5. Delete Task
-6. Exit
-
-> 1
-Enter task title: Buy groceries
-Enter task description (optional): Need to buy milk and bread
-Task added successfully with ID: 1
-
-> 2
-Tasks:
-[ ] 1. Buy groceries - Need to buy milk and bread
-
-> 4
-Enter task ID to mark complete/incomplete: 1
-Task 1 marked as complete
-
-> 2
-Tasks:
-[✓] 1. Buy groceries - Need to bread
-```
-
-## Project Structure
+## 📁 Project Structure
 
 ```
 src/
-├── todo_app.py          # Main application entry point with CLI loop
-├── models/
-│   └── task.py          # Task data model with validation
-├── services/
-│   └── task_manager.py  # Task management logic (CRUD operations)
-└── ui/
-    └── cli_interface.py # CLI interface and user interaction logic
-
-tests/
-├── unit/
-│   ├── test_task.py     # Task model tests
-│   └── test_task_manager.py # Task manager tests
-└── integration/
-    └── test_cli_flow.py # CLI flow integration tests
+├── todo_app.py          # Main application entry point
+├── agent/               # Intelligence layer
+│   └── todo_agent.py    # Natural language command processor
+├── models/              # Data models
+│   └── task.py          # Task data model
+├── services/            # Business logic
+│   ├── task_manager.py  # Task CRUD operations
+│   └── storage_manager.py # Data persistence
+└── ui/                  # User interface
+    └── cli_interface.py # Command-line interface
 ```
 
-## Important Notes
+## 🎯 Features
 
-- All data is stored in memory only and will be lost when the application exits
-- Task titles must be between 1 and 200 characters
-- Task IDs are auto-generated as unique integers
-- The application validates all user inputs and provides appropriate error messages
-
-## Running Tests
-
-To run the unit tests:
-
-```bash
-python -m unittest tests/unit/test_task_manager.py -v
-```
-
-## License
-
-This project is open source and available under the [MIT License](LICENSE).
+- ✅ Add, update, delete, and mark tasks as complete
+- ✅ Natural language command processing
+- ✅ Persistent storage in JSON format
+- ✅ Clean, intuitive command-line interface
+- ✅ Modular, extensible architecture
